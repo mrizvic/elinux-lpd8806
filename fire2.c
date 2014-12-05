@@ -1,3 +1,5 @@
+/* This code needs cleanup. It has been ported in november 2014 from https://github.com/FastLED/FastLED/blob/master/examples/Fire2012/Fire2012.ino */
+
 #include <unistd.h>
 #include <stdio.h>
 #include "lpd8806led.h"
