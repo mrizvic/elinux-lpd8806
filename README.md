@@ -1,3 +1,7 @@
+I forked this and ported FastLED's Fire2012 arduino sketch into fire.c and fire2.c
+--
+
+
 Total Control Lighting (p9813) Embedded Linux Library
 
 Copyright 2012 Christopher De Vries
