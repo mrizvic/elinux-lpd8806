@@ -1,4 +1,10 @@
-I forked this and ported FastLED's Fire2012 arduino sketch into fire.c and fire2.c
+I forked this and ported FastLED's Fire2012 arduino sketch into fire.c and fireN.c
+
+It successfully compiles on raspbian:
+gcc -O3 -lm -o fire5 fire5.c lpd8806led.c
+
+Check it out on [youtube](https://www.youtube.com/watch?v=UQNRoE6rN4M)
+
 --
 
 
