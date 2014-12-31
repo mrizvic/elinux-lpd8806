@@ -1,6 +1,10 @@
+#!/usr/bin/env python
+
 import websocket
 import time
 import sys
+import os
+import signal
 
 
 def on_message(ws, message):
@@ -18,6 +22,8 @@ def on_message(ws, message):
     browser raspi lpd8806.sparking1=40 lpd8806.sparking2=90 lpd8806.cooling1=160 lpd8806.cooling1=200 lpd8806.command=reload
     '''
 
+    pid = 17909
+
     args=message.split(' ')
     sender=args[4]
     rcpt=args[5]
@@ -30,15 +36,41 @@ def on_message(ws, message):
             var=arg[0]
             value=arg[1]
             print 'object {} variable {} value {}'.format(obj,var,value)
-            
-        
 
+            if obj=='lpd8806' and var=='sparking1':
+                print 'setting lpd8806.sparking1 to {}'.format(value)
+                f=open('/tmp/lpd8806-fire-sparking1','w')
+                f.write(value)
+                f.close()
+            
+            if obj=='lpd8806' and var=='cooling1':
+                print 'setting lpd8806.cooling1 to {}'.format(value)
+                f=open('/tmp/lpd8806-fire-cooling1','w')
+                f.write(value)
+                f.close()
+
+            if obj=='lpd8806' and var=='sparking2':
+                print 'setting lpd8806.sparking2 to {}'.format(value)
+                f=open('/tmp/lpd8806-fire-sparking2','w')
+                f.write(value)
+                f.close()
+            
+            if obj=='lpd8806' and var=='cooling2':
+                print 'setting lpd8806.cooling2 to {}'.format(value)
+                f=open('/tmp/lpd8806-fire-cooling2','w')
+                f.write(value)
+                f.close()
+
+            if obj=='lpd8806' and var=='command' and value=='reload':
+                print 'sending SIGUSR1 to {}'.format(pid)
+                os.kill(pid, signal.SIGUSR1)
 
 def on_error(ws, error):
     print(error)
 
 
 def on_close(ws):
+    ws.send('Bye from raspi')
     print("### closed ###")
 
 
